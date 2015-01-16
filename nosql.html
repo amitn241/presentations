@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>SQL vs NoSQL in Django applications - Presented by Amit Nabarro</title>
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<style>
+			.databases{
+				display: block;
+				list-style: none;
+			}
+			.databases>li{
+				box-shadow: none;
+				border: none;
+				display: inline;
+			}
+			.databases>li>img{;
+				width:200px;
+				box-shadow: none;
+				border: 0px;
+			}
+			section img{
+				box-shadow: none;
+				border: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section id='front'>
+					<h2 style='font-size:350%;'>SQL vs No-SQL</h2>
+					<br>
+					<h3>Considerations when developing Django Applications</h3>
+					<br><br>
+					<p>Presented by Amit Nabarro</p>
+					<p>@amitnabarro</p>
+				</section>
+				<section id='question'>
+					<h3>SQL or No SQL ?</h4>
+					<img src='img/yesno.jpg'>
+					<h3>That is the question</h4>
+				</section>
+				<section id='whatisit'>
+					<h2>But what is a No SQL database?</h2>
+					<blockquote>  
+						"...a mechanism for storage and retrieval of data that is modeled in means other than the tabular relations used in relational databases"
+					</blockquote>  
+				</section>
+				<section id='relational'>
+					<h3>No SQL means none - relational</h3>
+					<br>
+					<ul>
+						<li>Do not follow the relational model</li><br>
+						<li>No tables with flat fixed-column records</li><br>
+						<li>Self-contained aggregates that may include hierarchical data and BLOBS</li><br>
+						<li>No need for object-relational mapping</li>
+					</ul>
+				</section>
+				<section id='none-relational'>
+					<img src ='img/relations.jpg' width='50%'>
+				</section>
+				<section id='types'>
+					<h3>NoSQL Database Types</h3>
+					<h4>There are currently over 100 No SQL databases</h4>
+					<ul>
+						<li>Document databases</li>
+						<li>Key-Value stores</li>
+						<li>Graph stores</li>
+						<li>Wide-column stores</li>
+					</ul>
+					<br><br><br>
+					<ul class='databases'>
+						<li><img src='img/mongodb.png'></li>
+						<li><img src='img/couchdb.png'></li>
+						<li><img src='img/redis.png'></li>
+						<li><img src='img/riak.png'></li>
+					</ul>
+					<ul class='databases'>
+						<li><img src='img/neo4j.png'></li>
+						<li><img src='img/cassandra.png'></li>
+						<li><img src='img/hbase.png'></li>
+					</ul>
+				</section>
+				<section id='book'>
+					<img src='img/book.jpg' width='55%'>
+				</section>
+				<section id='care'>
+					<img src='img/care.jpg'>
+				</section>
+				<section id='benefits'>
+					<h3>Benefits of No-SQL Databases</h3>
+					<ul>
+						<li>Dynamic schemas</li>
+						<li>Open source</li>
+						<li>Simple APIs - easier to use</li>
+						<li>Distributed - elastic scaling out</li>
+						<li>Less need for DBA</li>
+						<li>Big data</li>
+						<li>Operating costs</li>
+					</ul>
+				</section>
+				<section id='schema'>
+					<blockquote>"Database schema is essential to a good data driven application"</blockquote>
+					<br><br>
+					<h3>Advantages of Dynamic Schemas</h4>
+					<ul>
+						<li>No data migrations</li>
+						<li>Agile development</li>
+						<li>Less down time</li>
+						<li>Suitable for dynamic programming languages</li>
+					</ul>
+				</section>
+				<section id='api'>
+					<h3>Simple API</h3>
+<pre style="background:#0c1021;color:#f8f8f8"><span style="color:#aeaeae">#!/usr/bin/env python</span>
+<span style="color:#aeaeae"># encoding: utf-8</span>
+
+<span style="color:#fbde2d">from</span> datetime <span style="color:#fbde2d">import</span> datetime
+<span style="color:#fbde2d">from</span> pymongo <span style="color:#fbde2d">import</span> MongoClient
+
+client <span style="color:#fbde2d">=</span> MongoClient()
+db <span style="color:#fbde2d">=</span> client[<span style="color:#61ce3c">'my-database'</span>]
+
+db.movies.insert({
+    <span style="color:#61ce3c">'title'</span> : <span style="color:#61ce3c">'Casablanca'</span>,
+    <span style="color:#61ce3c">'director'</span> : <span style="color:#61ce3c">'Michael Curtiz'</span>,
+    <span style="color:#61ce3c">'release'</span> : datetime.strptime(<span style="color:#61ce3c">'11 26 1942'</span>, <span style="color:#61ce3c">'<span style="color:#ff6400">%m</span> <span style="color:#ff6400">%d</span> <span style="color:#ff6400">%Y</span>'</span>),
+    <span style="color:#61ce3c">'actors'</span> : [
+        <span style="color:#61ce3c">'Humphrey Bogart'</span>,
+        <span style="color:#61ce3c">'Ingrid Bergman'</span>,
+        <span style="color:#61ce3c">'Paul Henreid'</span>,
+        <span style="color:#61ce3c">'Claude Rains'</span>,
+        <span style="color:#61ce3c">'Conrad Veidt'</span>,
+    ],
+    <span style="color:#61ce3c">'genres'</span> : [
+         <span style="color:#61ce3c">'Drama'</span>, <span style="color:#61ce3c">'Romance'</span>,  <span style="color:#61ce3c">'War'</span>
+    ]
+})
+</pre>
+				</section>
+				<section id='api2'>
+					<h3>Simple API</h3>
+					<br>
+					<ul>
+						<li>Simple interfaces to store and query data</li><br>
+						<li>Low level data manipulation and selection methods</li><br>
+						<li>Some APIs provide protocols such as HTTP REST with JSON data transport</li><br>
+						<li>Database as a service</li>
+					</ul>
+				</section>
+				<section id='distributed'>
+					<h3>Distributed</h3>
+					<br>
+					<ul>
+						<li>Scale out, not scale up</li><br>
+						<li>Some No-SQL DBs can run in a distributed mode which provide auto-sharding</li><br>
+						<li>Automatic replication and fail-over</li><br>
+						<li>Integrated caching capabilities</li><br>
+					</ul>
+				</section>
+				<section id='disadvantages'>
+					<img src='img/advantage.jpg'>
+				</section>
+				<section id='disadvantages2'>
+					<h3>Disadvantages</h3>
+					<br>
+					<ul>
+						<li>Storage is the primary focus</li><br>
+						<li>No standards</li><br>
+						<li>Lack of consistency (Eventual consistency)</li><br>
+						<li>Lacks in analytics and BI capabilities</li>
+					</ul>
+				</section>
+				<section id='not-use'>
+					<h2>When not to use ?</h2>
+					<br>
+					<ul>
+						<li>You already have legacy code which uses RDBMS</li><br>
+						<li>You must have ACID transactions</li><br>
+						<li>None technical reasons require you to use a commercial enterprise DB</li>
+					</ul>
+				</section>
+				<section id='use'>
+					<h2>When to use?</h2>
+					<br>
+					<ul>
+						<li>Your application works around a JSON API</li><br>
+						<li>Your application has an evolving data schema</li><br>
+						<li>You are starting a new project and you have design freedom</li><br>
+						<li>You want / need auto-sharding</li><br>
+						<li>You have high volume traffic</li>
+					</ul>
+				</section>
+				<section id='document-store'>
+					<h2>Document Store</h2>
+					<img src='img/documents.jpg'>
+				</section>
+				<section id='document-store-principals'>
+					<h2>Key Principals</h2>
+					<br>
+					<ul>
+						<li>Documents are self-contained aggregate data structures</li><br>
+						<li>Documents consist of attributes (key-value pairs)</li><br>
+						<li>Attributes have data types which can also be nested</li>
+					</ul>
+				</section>
+				<section id='mongodb'>
+					<div style='display:inline-block;width:30%;float:left;'>
+						<img src='img/mongodb-side.png' style='border:none; box-shadow:none;'>
+					</div>
+					<div style='display:inline-block;width:70%;float:right;'>
+						<h4>MongoDB (from "humongous")</h4>
+						<br><br>
+						<ul>
+						<li>Cross platform document-oriented database</li>
+						<li>Been around since 2007</li>
+						<li>Document-oriented database based on binary JSON (BSON)</li>
+						<li>Supports indexing</li>
+						<li>Supports ad-hoc queries</li>
+						<li>Supports replication</li>
+						<li>Supports file storage</li>
+						<li>Scales horizontally</li>
+						<li>Server-side Javascript execution</li>
+						<li>Aggregation and Map Reduce</li>
+					</div>
+				</section>
+				<section id='mongodb-structure'>
+					<h3>Mongo DB structure</h3>
+					<br>
+					<div style='text-align: left;'>MongoDB Instance</div><br>
+					<div style='text-align: left; margin-left:20%;'>Database</div><br>
+					<div style='text-align: left; margin-left:40%;'>Collection</div><br>
+					<div style='text-align: left; margin-left:60%;'>Document</div><br>
+					<div style='text-align: left; margin-left:80%;'>Key-Value pair</div><br>
+				</section>
+				<section id='django-mongodb'>
+					<h1>Django</h1>
+					<h1>+</h1>
+					<h1>Mongo DB</h1>
+				</section>
+				<section id='django-mongo-options'>
+					<h2>Interfacing with django</h2><br><br>
+					<h3>Django nonrel</h3><br>
+					<h3>Mongoengine</h3><br>
+					<h3>pymongo</h3> 
+				</section>
+			</div>
+		</div>
+		<script>
+			Reveal.initialize({
+				dependencies: [
+				    // Syntax highlight for <code> elements
+        			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        		],
+				history: true,
+				progress: true,
+			});
+		</script>
+	</body>
+</html>
