@@ -1,0 +1,178 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>A Primer to RESTful applications with Django - Presented by Amit Nabarro</title>
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+		<style>
+			.column-left{
+				display: inline-block;
+				float:left;
+				width:40%;
+			}
+			.column-right{
+				display: inline-block;
+				float:right;
+				width:40%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section id='front'>
+					<h3>An Instroduction to</h3>
+					<br>
+					<h2 style='font-size:350%;'>RESTful API with Django</h2>
+					<br><br>
+					<p>Presented by Amit Nabarro</p>
+					<p>@amitnabarro</p>
+				</section>
+				<section id='traditional'>
+					<h2>Classic Django is MVC</h2><br><br>
+					<h3>Views respond with HTML</h3>
+				</section>
+				<section id='whatisapi'>
+					<h2>What is a web API?</h2>
+					<br><br>
+					<blockquote style='font-size:130%; line-height:130%;'>
+						... application programmatic interface to a defined request-response message system
+					</blockquote>
+				</section>
+				<section id='whydoit'>
+					<h2>Why do it?</h2>
+					<br>
+					<ul class='column-left'>
+        				<li>Allow multiple platforms access to your app</li><br>
+        				<li>Allow machines access to your app</li><br>
+       					<li>Modularity and separation</li><br>
+       					<li>Easier to build single-page applications</li>
+    				</ul>
+    				<div class='column-right'>
+    					<img src='img/motivation.jpg' width='300'>
+    				<div>
+				</section>
+				<section id='doityourself'>
+					<h2>Do it yourself ?</h2>
+					<br>
+					<div class='column-left'>
+						<h4>Django views can return JSON</h4>
+					</div>
+					<div class='column-right'>
+						<img src='img/diy.gif'>
+					</div>
+				</section>
+				<section id='diy_example'>
+					<h2>DIY example</h2>
+					<br>
+					<br>
+					<div style='font-size:180%;'>
+<pre style='color:#d1d1d1;background:#000000;'><pre>
+<span style='color:#e66170; font-weight:bold; '>from</span> django<span style='color:#d2cd86; '>.</span>http <span style='color:#e66170; font-weight:bold; '>import</span> HttpResponse
+<span style='color:#e66170; font-weight:bold; '>import</span> json
+
+<span style='color:#e66170; font-weight:bold; '>def</span> get_user_name<span style='color:#d2cd86; '>(</span>request<span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>:</span>
+    data <span style='color:#d2cd86; '>=</span> <span style='color:#b060b0; '>{</span>
+        <span style='color:#00c4c4; '>'first_name'</span> <span style='color:#d2cd86; '>:</span> request<span style='color:#d2cd86; '>.</span>user<span style='color:#d2cd86; '>.</span>first_name
+        <span style='color:#00c4c4; '>'last_name'</span> <span style='color:#d2cd86; '>:</span> request<span style='color:#d2cd86; '>.</span>user<span style='color:#d2cd86; '>.</span>last_name
+    <span style='color:#b060b0; '>}</span>
+    <span style='color:#e66170; font-weight:bold; '>return</span> HttpResponse<span style='color:#d2cd86; '>(</span>json<span style='color:#d2cd86; '>.</span>dumps<span style='color:#d2cd86; '>(</span>data<span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>,</span> mimetype<span style='color:#d2cd86; '>=</span><span style='color:#00c4c4; '>"application/json"</span><span style='color:#d2cd86; '>)</span>
+</pre>
+					</div>
+				</section>
+				<section id='whatisrest'>
+					<h2>What is REST ?</h2><br><br>
+					<blockquote> 
+						"Representational State Transfer (REST) is a software architecture style consisting of guidelines and best practices for creating scalable web services"
+					</blockquote>
+				</section>
+				<section id='principals1'>
+					<h2>Pricnipals of REST</h2>
+					<br>
+					<h3>Resources are unique</h3>
+					<pre style='font-size:100%;'>
+						<span>/api/users/1/</span>
+						<span>/api/users/?first_name=amit</span>
+						<span>/api/users/1/favorite_books</span>
+					</pre>
+				</section>
+				<section id='principals2'>
+					<h2>Pricnipals of REST</h2>
+					<br>
+					<h3>Stateless Interactions</h3>				
+				</section>
+				<section id='whatyouget'>
+					<h2>What you can expect ?</h2>
+					<div class='column-left'>
+						<ul>
+							<li>Serialization</li>
+							<li>Pagination</li>
+							<li>Validation</li>
+							<li>Authentication</li>
+							<li>Authorization</li>
+							<li>Throttling</li>
+							<li>Caching</li>
+							<li>API discovery</li>
+							<li>Unit testing</li>
+							<li>...... And more</li>
+						</ul>
+					</div>
+					<div class='column-right'>
+						<img src='img/free1.jpg'/>
+					</div>
+				</section>
+				<section id='existing'>
+					<h2>Existing Frameworks</h2>
+					<br>
+					<br>
+					<ul>
+						<li>Django Rest Framework (DRF)</li>
+						<li>Django Tastypie</li>
+						<li>Django Piston</li>
+					</ul>
+				</section>
+				<section id='example'>
+					<h2>Example</h2><br>
+					<div style='font-size:200%;'>
+<pre style='color:#d1d1d1;background:#000000;'><pre>
+<span style='color:#e66170; font-weight:bold; '>from</span> django<span style='color:#d2cd86; '>.</span>db <span style='color:#e66170; font-weight:bold; '>import</span> models
+<span style='color:#e66170; font-weight:bold; '>from</span> tastypie<span style='color:#d2cd86; '>.</span>resources <span style='color:#e66170; font-weight:bold; '>import</span> ModelResource
+
+<span style='color:#e66170; font-weight:bold; '>class</span> Book<span style='color:#d2cd86; '>(</span>models<span style='color:#d2cd86; '>.</span>Model<span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>:</span>
+    author <span style='color:#d2cd86; '>=</span> models<span style='color:#d2cd86; '>.</span>CharField<span style='color:#d2cd86; '>(</span>max_length<span style='color:#d2cd86; '>=</span><span style='color:#00a800; '>50</span><span style='color:#d2cd86; '>)</span>
+    publisher <span style='color:#d2cd86; '>=</span> models<span style='color:#d2cd86; '>.</span>CharField<span style='color:#d2cd86; '>(</span>max_length<span style='color:#d2cd86; '>=</span><span style='color:#00a800; '>50</span><span style='color:#d2cd86; '>)</span>
+    pub_date <span style='color:#d2cd86; '>=</span> models<span style='color:#d2cd86; '>.</span>DateTimeField<span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span>
+
+
+<span style='color:#e66170; font-weight:bold; '>class</span> BookResource<span style='color:#d2cd86; '>(</span>ModelResource<span style='color:#d2cd86; '>)</span><span style='color:#d2cd86; '>:</span>
+    <span style='color:#e66170; font-weight:bold; '>class</span> Meta<span style='color:#d2cd86; '>:</span>
+        queryset <span style='color:#d2cd86; '>=</span> Book<span style='color:#d2cd86; '>.</span>objects<span style='color:#d2cd86; '>.</span><span style='color:#e66170; font-weight:bold; '>all</span><span style='color:#d2cd86; '>(</span><span style='color:#d2cd86; '>)</span>
+        resource_name <span style='color:#d2cd86; '>=</span> <span style='color:#00c4c4; '>'books'</span>
+</pre>
+					</div>
+				</section>
+				<section id='nosql'>
+					<h2>NoSQL No Problem</h2>
+					<br>
+					<img src='img/nosql.gif'>
+				</section>
+				<section id='thankyou'>
+					<h1>Thank You</h1><br><br>
+					<h2>Happy Coding</h2>
+				</section>
+			</div>
+		</div>
+		<script>
+			Reveal.initialize({
+				dependencies: [
+				    // Syntax highlight for <code> elements
+        			{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        		],
+				history: true,
+				progress: true,
+			});
+		</script>
+	</body>
+</html>
